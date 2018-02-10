@@ -1,0 +1,5 @@
+{
+    "apiBaseUrl": "http://127.0.0.1:4000",
+    "defaultRedirection": "/klasa/4ET",
+    "timetableTypes": ["nauczyciel", "klasa", "sala"]
+}
