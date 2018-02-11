@@ -7,9 +7,9 @@ export class AppView extends ComponentView {
 
     get template() {
 
-        const { defaultRedirection, fetchData, userInterfaceModel } = this._props;
+        const { defaultRedirection, fetchData, isAndroidDevice } = this._props;
 
-        if (userInterfaceModel.isAndroidDevice) {
+        if (isAndroidDevice) {
 
             return new MobileApp().render();
         }

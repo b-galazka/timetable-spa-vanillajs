@@ -28,7 +28,7 @@ export class App extends Component {
             timetableTypes,
             defaultRedirection,
             fetchData: App._fetchTimetableData.bind(this),
-            userInterfaceModel
+            isAndroidDevice: userInterfaceModel.isAndroidDevice
         });
     }
 
