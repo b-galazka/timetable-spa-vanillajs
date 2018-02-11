@@ -5,6 +5,7 @@ import { Renderer } from '../lib/Renderer';
 import { AppView } from './AppView';
 import * as models  from '../models';
 import * as initialDataModels from '../models/timetableObjectsLists';
+import * as components from '../components';
 
 import config from '../config';
 import urlsTranslations from './urlsTranslations';
@@ -25,7 +26,6 @@ export class App extends Component {
             timetableTypes,
             defaultRedirection,
             fetchData: App._fetchTimetableData.bind(this),
-            mobileAppModel,
             userInterfaceModel
         });
     }
@@ -35,6 +35,7 @@ export class App extends Component {
         this._renderer.renderView(this.render());
         this._initViewUpdates();
         this.initEventsHandlers();
+        this._initChildsComponentsEventsHandlers();
 
         Router.init(this._root);
 
@@ -60,6 +61,13 @@ export class App extends Component {
         Object.values(models).forEach(model => (
             model.dataChangeNotifier.addListener(updateView)
         ));
+    }
+
+    _initChildsComponentsEventsHandlers() {
+
+        Object
+            .values(components)
+            .forEach(Component => new Component().initEventsHandlers(this._root));
     }
 
     static _fetchTimetableData({ timetableType, slug }) {
