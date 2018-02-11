@@ -27,8 +27,7 @@ export class App extends Component {
         this._view = new AppView({
             timetableTypes,
             defaultRedirection,
-            fetchData: App._fetchTimetableData.bind(this),
-            isAndroidDevice: userInterfaceModel.isAndroidDevice
+            fetchData: App._fetchTimetableData.bind(this)
         });
     }
 
@@ -43,7 +42,7 @@ export class App extends Component {
 
         const { userInterfaceModel, mobileAppModel } = models;
 
-        if (userInterfaceModel.isAndroidDevice) {
+        if (userInterfaceModel.showMobileApp) {
 
             mobileAppModel.fetchData();
         }

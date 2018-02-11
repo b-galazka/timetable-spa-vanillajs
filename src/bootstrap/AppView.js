@@ -2,14 +2,15 @@ import { ComponentView } from '../lib/ComponentView';
 import { Router } from '../lib/Router';
 
 import { MobileApp } from '../components';
+import { userInterfaceModel } from '../models';
 
 export class AppView extends ComponentView {
 
     get template() {
 
-        const { defaultRedirection, fetchData, isAndroidDevice } = this._props;
+        const { defaultRedirection, fetchData } = this._props;
 
-        if (isAndroidDevice) {
+        if (userInterfaceModel.showMobileApp) {
 
             return new MobileApp().render();
         }
