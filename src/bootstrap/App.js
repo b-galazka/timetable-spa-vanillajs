@@ -16,7 +16,7 @@ export class App extends Component {
         super();
 
         const { timetableTypes, defaultRedirection } = config;
-        const { timetableObjectModel } = models;
+        const { timetableObjectModel, mobileAppModel, userInterfaceModel } = models;
 
         this._root = root;
         this._renderer = new Renderer(this._root);
@@ -25,7 +25,8 @@ export class App extends Component {
             timetableTypes,
             defaultRedirection,
             fetchData: App._fetchTimetableData.bind(this),
-            timetableObjectModel
+            mobileAppModel,
+            userInterfaceModel
         });
     }
 
@@ -35,7 +36,14 @@ export class App extends Component {
         this._initViewUpdates();
         this.initEventsHandlers();
 
-        Router.init(this._root);    
+        Router.init(this._root);
+
+        const { userInterfaceModel, mobileAppModel } = models;
+
+        if (userInterfaceModel.isAndroidDevice) {
+
+            mobileAppModel.fetchData();
+        }
     }
 
     updateView() {

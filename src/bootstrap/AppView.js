@@ -1,11 +1,18 @@
 import { ComponentView } from '../lib/ComponentView';
 import { Router } from '../lib/Router';
 
+import { MobileApp } from '../components';
+
 export class AppView extends ComponentView {
 
     get template() {
 
-        const { defaultRedirection, fetchData } = this._props;
+        const { defaultRedirection, fetchData, userInterfaceModel } = this._props;
+
+        if (userInterfaceModel.isAndroidDevice) {
+
+            return new MobileApp().render();
+        }
 
         return new Router({
 
