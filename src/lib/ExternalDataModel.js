@@ -1,15 +1,15 @@
-import { Notifier } from './Notifier';
+import { Model } from './Model';
 
-export class ExternalDataModel {
+export class ExternalDataModel extends Model {
 
     constructor() {
+
+        super();
 
         this.fetchedData = null;
         this.fetching = false;
         this.fetched = false;
         this.fetchingError = false;
-
-        this.dataChangeNotifier = new Notifier();
     }
 
     _fetchingStarted() {
