@@ -1,0 +1,32 @@
+@import '../sharedScss/config';
+
+@font-face {
+    src: url('/fonts/CaviarDreams.woff');
+    font-family: $font;
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+
+    @media (max-width: 1300px) {
+        font-size: 14px;
+    }
+}
+
+body {
+    color: #FFF;
+    background-color: $lighterGrey;
+    font-family: $font;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

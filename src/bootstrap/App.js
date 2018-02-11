@@ -10,6 +10,8 @@ import * as components from '../components';
 import config from '../config';
 import urlsTranslations from './urlsTranslations';
 
+import './app.scss';
+
 export class App extends Component {
 
     constructor(root) {
