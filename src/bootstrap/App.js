@@ -7,8 +7,7 @@ import * as models  from '../models';
 import * as initialDataModels from '../models/timetableObjectsLists';
 import * as components from '../components';
 
-import config from '../config';
-import urlsTranslations from './urlsTranslations';
+import urlsTranslations from '../shared/json/urlsTranslations';
 
 import './app.scss';
 
@@ -18,15 +17,10 @@ export class App extends Component {
 
         super();
 
-        const { timetableTypes, defaultRedirection } = config;
-        const { timetableObjectModel, mobileAppModel, userInterfaceModel } = models;
-
         this._root = root;
         this._renderer = new Renderer(this._root);
 
         this._view = new AppView({
-            timetableTypes,
-            defaultRedirection,
             fetchData: App._fetchTimetableData.bind(this)
         });
     }
@@ -42,7 +36,7 @@ export class App extends Component {
 
         const { userInterfaceModel, mobileAppModel } = models;
 
-        if (userInterfaceModel.showMobileApp) {
+        if (userInterfaceModel.shouldDisplayMobileApp) {
 
             mobileAppModel.fetchData();
         }

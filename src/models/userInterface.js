@@ -6,12 +6,12 @@ class UserInterfaceModel extends Model {
 
         super();
 
-        this.showMobileApp = UserInterfaceModel.detectAndroidDevice();
+        this.shouldDisplayMobileApp = UserInterfaceModel.detectAndroidDevice();
     }
 
     hideMobileApp() {
 
-        this.showMobileApp = false;
+        this.shouldDisplayMobileApp = false;
 
         this.dataChangeNotifier.notifyAllListeners();
     }

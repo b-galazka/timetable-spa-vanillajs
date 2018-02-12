@@ -4,9 +4,4 @@ export class ComponentView {
 
         this._props = props;
     }
-
-    get eventsHandlers() {
-
-        return [];
-    }
 }

@@ -2,12 +2,17 @@ export class Component {
 
     render() {
 
-        return this._view.template;
+        return (this._view ? this._view.template : this.template);
     }
 
     initEventsHandlers(root = this._root) {
 
-        const { eventsHandlers } = this._view;
+        const { eventsHandlers } = this._view || this;
+
+        if (!Array.isArray(eventsHandlers)) {
+
+            return;
+        }
 
         eventsHandlers.forEach((eventHandler) => {
 

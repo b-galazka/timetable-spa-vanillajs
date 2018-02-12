@@ -4,13 +4,15 @@ import { Router } from '../lib/Router';
 import { MobileApp } from '../components';
 import { userInterfaceModel } from '../models';
 
+import config from '../config';
+
 export class AppView extends ComponentView {
 
     get template() {
 
-        const { defaultRedirection, fetchData } = this._props;
+        const { fetchData } = this._props;
 
-        if (userInterfaceModel.showMobileApp) {
+        if (userInterfaceModel.shouldDisplayMobileApp) {
 
             return new MobileApp().render();
         }
@@ -21,7 +23,7 @@ export class AppView extends ComponentView {
 
                 {
                     path: '/',
-                    redirect: defaultRedirection,
+                    redirect: config.defaultRedirection,
                     exact: true
                 },
 
@@ -42,12 +44,12 @@ export class AppView extends ComponentView {
 
     _renderAppContent({ timetableType, slug }) {
 
-        const { timetableTypes } = this._props;
+        const { timetableTypes } = config;
 
         if (timetableTypes.includes(timetableType)) {
 
             return `
-                <p>${slug}</p>
+                <p>klasa ${slug}</p>
             `;
         }
 
