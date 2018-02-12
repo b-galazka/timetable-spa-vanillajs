@@ -1,0 +1,18 @@
+.not-found-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-width: 250px;
+    padding: 10px;
+
+    &__wrapper {
+        margin: 10px;
+        text-align: center;
+        max-width: 300px;
+    }
+
+    &__button {
+        margin-top: 15px;
+    }
+}

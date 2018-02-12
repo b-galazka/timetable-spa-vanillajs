@@ -68,13 +68,13 @@ export class MobileApp extends Component {
         return `
             <div class="mobile-app__wrapper">
                 <a
-                    class="mobile-app__button"
+                    class="button mobile-app__button"
                     href=${apkFileUrl}
                     target="_blank"
                 >${strings.downloadApp}</a>
 
                 <button
-                    class="mobile-app__button"
+                    class="button mobile-app__button"
                     id="visit-page-button"
                 >${strings.visitPage}</button>
             </div>
@@ -93,9 +93,9 @@ export class MobileApp extends Component {
     _renderFetchingError() {
 
         return `
-            <p class="mobile-app__fetching-error">
-                ${sharedStrings.fetchingError}
-            </p>
+            <p
+                class="mobile-app__fetching-error"
+            >${sharedStrings.fetchingError}</p>
         `;
     }
 }

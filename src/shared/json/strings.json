@@ -1,3 +1,6 @@
 {
-    "fetchingError": "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później."
+    "fetchingError": "Wystąpił błąd podczas pobierania danych. Spróbuj ponownie później.",
+    "pageNotFound": "Podstrona o tym adresie nie istnieje.",
+    "baseTitle": "ZSCKP | ",
+    "notFoundTitle": "błąd 404"
 }

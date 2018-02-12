@@ -1,6 +1,19 @@
 export class Component {
 
+    static renderTitle(title) {
+
+        if (document.title !== title) {
+
+            document.title = title;
+        }
+    }
+
     render() {
+
+        if (typeof this.title === 'string') {
+
+            Component.renderTitle(this.title);
+        }
 
         return (this._view ? this._view.template : this.template);
     }

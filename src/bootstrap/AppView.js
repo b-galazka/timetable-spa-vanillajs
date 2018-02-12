@@ -2,6 +2,7 @@ import { ComponentView } from '../lib/ComponentView';
 import { Router } from '../lib/Router';
 
 import { MobileApp } from '../components';
+import { NotFound } from '../components';
 import { userInterfaceModel } from '../models';
 
 import config from '../config';
@@ -36,7 +37,7 @@ export class AppView extends ComponentView {
             ],
 
             notFoundFallback: {
-                render: () => '<a routerLink="/">home</a>'
+                component: NotFound
             }
 
         }).renderProperElements();
