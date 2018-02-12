@@ -11,7 +11,7 @@ export class Router {
 
     renderProperElements() {
 
-        const output = this._routes.reduce(this._checkEachRoute.bind(this), '');
+        const output = this._getOutput();
 
         if (output !== '') {
 
@@ -25,23 +25,27 @@ export class Router {
         );
     }
 
-    _checkEachRoute(output, route) {
+    _getOutput() {
 
-        if (!route.path.includes(':')) {
+        let output = '';
 
-            if (this._compareRoutePathAsString(route)) {
+        for (const route of this._routes) {
 
-                output += this._processRoute(route);
+            const routeComparisonResult = this._compareRoutePathAsArray(route);
+
+            if (routeComparisonResult === false) {
+
+                continue;
             }
 
-        } else {
+            const outputPart = this._processRoute(route, routeComparisonResult);
 
-            const urlParams = this._compareRoutePathAsArray(route);
+            if (outputPart === false) {
 
-            if (urlParams !== false) {
-
-                output += this._processRoute(route, urlParams);
+                return this._getOutput();
             }
+
+            output += outputPart;
         }
 
         return output;
@@ -72,21 +76,26 @@ export class Router {
             return false;
         }
 
+        return Router._compareRoutesParts(currentPathParts, routePathParts);
+    }
+
+    static _compareRoutesParts(currentPathParts, routePathParts) {
+
         const urlParams = {};
 
         for (let i = 0; i < routePathParts.length; i++) {
 
-            const currentPath = currentPathParts[i];
+            const currentPathPart = currentPathParts[i];
             const routePathPart = routePathParts[i];
 
             if (routePathPart.charAt(0) === ':') {
 
-                urlParams[routePathPart.slice(1)] = currentPath;
+                urlParams[routePathPart.slice(1)] = currentPathPart;
 
                 continue;
             }
 
-            if (routePathPart !== currentPath) {
+            if (routePathPart !== currentPathPart) {
 
                 return false;
             }
@@ -102,10 +111,10 @@ export class Router {
 
         if (redirect) {
 
-            return this._redirect(redirect);
-        }
+            Router._redirect(redirect);
 
-        Router.urlParams = urlParams;
+            return false;
+        }
 
         const processingPath = Router._getCurrentPath();
 
@@ -127,16 +136,14 @@ export class Router {
         return new component({ urlParams }).render();
     }
 
-    _redirect(path) {
+    static _redirect(path) {
 
         if (Router._getCurrentPath() === path) {
 
             return;
         }
 
-        history.pushState(null, '', path);
-
-        return this.renderProperElements();
+        history.replaceState(null, '', path);
     }
 
     static init(root) {
@@ -145,6 +152,14 @@ export class Router {
 
             return;
         }
+
+        Router._initRouterLinks(root);
+        Router._initOnPopStateNotifications();
+        
+        Router._initialized = true;
+    }
+
+    static _initRouterLinks(root) {
 
         root.addEventListener('click', (event) => {
 
@@ -160,8 +175,14 @@ export class Router {
 
             Router.navigate(routerLink);
         });
+    }
 
-        Router._initialized = true;
+    static _initOnPopStateNotifications() {
+
+        window.addEventListener('popstate', () => {
+
+            Router.locationChangeNotifier.notifyAllListeners();
+        });
     }
 
     static navigate(path) {
@@ -175,7 +196,7 @@ export class Router {
 
         history.pushState(null, '', path);
 
-        Router.locationChangeNotifier.notifyAllListeners([currentPath, location.pathname]);
+        Router.locationChangeNotifier.notifyAllListeners();
     }
 
     static get locationChangeNotifier() {
