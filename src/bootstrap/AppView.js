@@ -54,6 +54,6 @@ export class AppView extends ComponentView {
             `;
         }
 
-        return '404';
+        return new NotFound().render();
     }
 }
