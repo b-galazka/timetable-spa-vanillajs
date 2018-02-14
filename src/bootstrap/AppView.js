@@ -3,6 +3,7 @@ import { Router } from '../lib/Router';
 
 import { MobileApp } from '../components';
 import { NotFound } from '../components';
+import { AppContent } from '../components';
 import { userInterfaceModel } from '../models';
 
 import config from '../config';
@@ -49,9 +50,7 @@ export class AppView extends ComponentView {
 
         if (timetableTypes.includes(timetableType)) {
 
-            return `
-                <p>klasa ${slug}</p>
-            `;
+            return new AppContent().render();
         }
 
         return new NotFound().render();

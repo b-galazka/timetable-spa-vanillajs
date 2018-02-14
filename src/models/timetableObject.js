@@ -13,6 +13,7 @@ class TimetableObjectModel extends ExternalDataModel {
 
         super();
 
+        this.fetchedAsInitialData = false;
         this.notFound = false;
         this.timetableObjectType = null;
         this.slug = null;
@@ -82,6 +83,7 @@ class TimetableObjectModel extends ExternalDataModel {
     _fetchingSucceeded(data) {
 
         this.notFound = false;
+        this.fetchedAsInitialData = true;
 
         super._fetchingSucceeded(data);
     }
