@@ -9,13 +9,6 @@ class UserInterfaceModel extends Model {
         this.shouldDisplayMobileApp = UserInterfaceModel.detectAndroidDevice();
     }
 
-    hideMobileApp() {
-
-        this.shouldDisplayMobileApp = false;
-
-        this.dataChangeNotifier.notifyAllListeners();
-    }
-
     static detectAndroidDevice() {
 
         const userAgent = navigator.userAgent.toLowerCase();

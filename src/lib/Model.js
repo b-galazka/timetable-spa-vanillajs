@@ -6,4 +6,14 @@ export class Model {
 
         this.dataChangeNotifier = new Notifier();
     }
+
+    setData(data) {
+
+        Object.keys(data).forEach((key) => {
+
+            this[key] = data[key];
+        });
+
+        this.dataChangeNotifier.notifyAllListeners();
+    }
 }

@@ -14,33 +14,29 @@ export class ExternalDataModel extends Model {
 
     _fetchingStarted() {
 
-        this.fetched = false;
-        this.fetching = true;
-        this.fetchingError = false;
-
-        this.dataChangeNotifier.notifyAllListeners();
+        this.setData({
+            fetched: false,
+            fetching: true,
+            fetchingError: false
+        });
     }
 
     _fetchingSucceeded(data) {
 
-        this.fetchedData = data;
-        this.fetching = false;
-        this.fetched = true;
-        this.fetchingError = false;
-
-        this.dataChangeNotifier.notifyAllListeners();
-
-        return true;
+        this.setData({
+            fetchedData: data,
+            fetched: true,
+            fetching: false,
+            fetchingError: false
+        });
     }
 
     _fetchingFailed() {
 
-        this.fetching = false;
-        this.fetched = false;
-        this.fetchingError = true;
-
-        this.dataChangeNotifier.notifyAllListeners();
-
-        return false;
+        this.setData({
+            fetched: false,
+            fetching: false,
+            fetchingError: true
+        });
     }
 }

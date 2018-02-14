@@ -42,10 +42,14 @@ class TimetableObjectModel extends ExternalDataModel {
                     `/${_pluralizeTimetableObjectType(timetableObjectType)}/${slug}`
                 );
 
-                return this._fetchingSucceeded(data);
+                this._fetchingSucceeded(data);
+
+                return true;
             } catch (error) {
 
-                return this._fetchingFailed();
+                this._fetchingFailed();
+
+                return false;
             }
         })();
     }

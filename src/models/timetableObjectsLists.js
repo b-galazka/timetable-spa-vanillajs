@@ -28,10 +28,14 @@ class TimetableObjectsListModel extends ExternalDataModel {
 
                 const { data } = await timetableApiRequest.get(`/${this._listType}`);
 
-                return this._fetchingSucceeded(data);
+                this._fetchingSucceeded(data);
+
+                return true;
             } catch (error) {
 
-                return this._fetchingFailed();
+                this._fetchingFailed();
+
+                return false;
             }
         })();
     }

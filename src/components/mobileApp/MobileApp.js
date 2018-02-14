@@ -14,7 +14,9 @@ export class MobileApp extends Component {
 
     _visitPage() {
 
-        userInterfaceModel.hideMobileApp();
+        userInterfaceModel.setData({
+            shouldDisplayMobileApp: false
+        });
     }
 
     get template() {
