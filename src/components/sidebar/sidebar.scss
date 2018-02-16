@@ -1,0 +1,59 @@
+@import '../../shared/scss/config';
+
+.sidebar {
+    width: 300px;
+    background-color: $darkGrey;
+    border-right: 5px solid #FFF;
+    flex: 0 0 auto;
+    text-align: center;
+    overflow-y: auto;
+
+    @media (max-width: 1300px) {
+        width: 270px;
+    }
+
+    &__wrapper {
+        padding: 50px 10px 0 10px;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__button {
+        display: block;
+        background-color: transparent;
+        border: none;
+        color: #FFF;
+        font-family: $font;
+        outline: 0;
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        cursor: pointer;
+
+        &--active {
+            font-size: 2rem;
+        }
+    }
+
+    &__list li {
+        margin-top: 10px;
+        list-style-type: none;
+
+        &:last-child {
+            margin-bottom: 50px;
+        }
+
+        &.active {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        a {
+            cursor: pointer;
+        }
+    }
+}

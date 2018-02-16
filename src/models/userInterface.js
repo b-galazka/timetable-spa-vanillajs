@@ -7,7 +7,11 @@ class UserInterfaceModel extends Model {
         super();
 
         this.shouldDisplayMobileApp = UserInterfaceModel.detectAndroidDevice();
+
         this.appContentAnimation = true;
+
+        this.activeTimetableObjectsList = null;
+        this.timetableObjectsListSelected = false;
     }
 
     static detectAndroidDevice() {

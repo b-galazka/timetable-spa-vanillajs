@@ -1,5 +1,8 @@
 {
     "nauczyciel": "teachers",
     "klasa": "classes",
-    "sala": "classrooms"
+    "sala": "classrooms",
+    "teachers": "nauczyciel",
+    "classes": "klasa",
+    "classrooms": "sala"
 }

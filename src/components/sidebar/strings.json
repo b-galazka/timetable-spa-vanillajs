@@ -1,0 +1,6 @@
+{
+    "timetableObjectsListsTypes": ["classes", "teachers", "classrooms"],
+    "classes": "Klasy",
+    "teachers": "Nauczyciele",
+    "classrooms": "Sale"
+}

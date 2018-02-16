@@ -44,13 +44,14 @@ export class AppView extends ComponentView {
         }).renderProperElements();
     }
 
-    _renderAppContent({ timetableType, slug }) {
+    _renderAppContent(urlParams) {
 
         const { timetableTypes } = config;
+        const { timetableType } = urlParams;
 
         if (timetableTypes.includes(timetableType)) {
 
-            return new AppContent().render();
+            return new AppContent({ urlParams }).render();
         }
 
         return new NotFound().render();

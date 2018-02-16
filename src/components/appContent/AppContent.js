@@ -3,7 +3,7 @@ import { getCssClasses } from '../../lib/getCssClasses';
 
 import * as initialDataModels from '../../models/timetableObjectsLists';
 import { timetableObjectModel, userInterfaceModel } from '../../models';
-import { LoadingAnimation } from '../';
+import { LoadingAnimation, Sidebar } from '../';
 
 import sharedStrings from '../../shared/json/strings';
 
@@ -12,10 +12,11 @@ import '../../shared/scss/animations.scss';
 
 export class AppContent extends Component {
 
-    constructor() {
+    constructor({ urlParams }) {
 
         super();
 
+        this.urlParams = urlParams;
         this.initialDataModels = Object.values(initialDataModels);
     }
 
@@ -96,9 +97,11 @@ export class AppContent extends Component {
             'animated': userInterfaceModel.appContentAnimation
         });
 
+        const { urlParams } = this;
+
         return `
             <section class="${cssClasses}">
-                <p>${timetableObjectModel.slug}</p>
+                ${new Sidebar({ urlParams }).render()}
             </section>
         `;
     }

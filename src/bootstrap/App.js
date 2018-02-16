@@ -62,7 +62,7 @@ export class App extends Component {
 
         Object
             .values(components)
-            .forEach(Component => new Component().initEventsHandlers(this._root));
+            .forEach(Component => new Component({}).initEventsHandlers(this._root));
     }
 
     static _fetchTimetableData({ timetableType, slug }) {
