@@ -1,0 +1,23 @@
+.app {
+    height: 100vh;
+
+    &__content, &__loader, &__error {
+        display: flex;
+        height: 100%;
+    }
+
+    &__content {
+        min-width: 600px;
+    }
+
+    &__error, &__loader {
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        min-width: 250px;
+    }
+
+    &__error-message {
+        text-align: center;
+    }
+}

@@ -7,6 +7,7 @@ class UserInterfaceModel extends Model {
         super();
 
         this.shouldDisplayMobileApp = UserInterfaceModel.detectAndroidDevice();
+        this.appContentAnimation = true;
     }
 
     static detectAndroidDevice() {

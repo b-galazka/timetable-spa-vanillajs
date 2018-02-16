@@ -1,10 +1,14 @@
 import { Component } from '../../lib/Component';
+import { getCssClasses } from '../../lib/getCssClasses';
 
 import * as initialDataModels from '../../models/timetableObjectsLists';
-import { timetableObjectModel } from '../../models';
+import { timetableObjectModel, userInterfaceModel } from '../../models';
 import { LoadingAnimation } from '../';
 
 import sharedStrings from '../../shared/json/strings';
+
+import './appContent.scss';
+import '../../shared/scss/animations.scss';
 
 export class AppContent extends Component {
 
@@ -22,6 +26,26 @@ export class AppContent extends Component {
                 ${this._renderProperTemplate()}
             </main>
         `;
+    }
+
+    get eventsHandlers() {
+
+        const removeAnimationClass = this._removeAnimationClass.bind(this);
+
+        return [
+
+            {
+                event: 'animationend',
+                selector: '.app__content',
+                handler: removeAnimationClass
+            },
+
+            {
+                event: 'webkitAnimationEnd',
+                selector: '.app__content',
+                handler: removeAnimationClass
+            }
+        ]
     }
 
     _renderProperTemplate() {
@@ -67,8 +91,13 @@ export class AppContent extends Component {
 
     _renderContent() {
 
+        const cssClasses = getCssClasses({
+            'app__content': true,
+            'animated': userInterfaceModel.appContentAnimation
+        });
+
         return `
-            <section class="app__content">
+            <section class="${cssClasses}">
                 <p>${timetableObjectModel.slug}</p>
             </section>
         `;
@@ -99,5 +128,12 @@ export class AppContent extends Component {
                 >${sharedStrings.fetchingError}</p>
             </section>
         `;
+    }
+
+    _removeAnimationClass() {
+
+        userInterfaceModel.setData({
+            appContentAnimation: false
+        });
     }
 }
