@@ -15,13 +15,11 @@ class TimetableObjectModel extends ExternalDataModel {
 
         this.fetchedAsInitialData = false;
         this.notFound = false;
-        this.timetableObjectType = null;
-        this.slug = null;
     }
 
     fetchData(timetableObjectType, slug) {
 
-        const { _doesSlugExist, _pluralizeTimetableObjectType } = TimetableObjectModel;
+        const { _doesSlugExist } = TimetableObjectModel;
 
         return (async () => {
 
@@ -32,14 +30,12 @@ class TimetableObjectModel extends ExternalDataModel {
                 return this._notFound();
             }
 
-            this.timetableObjectType = timetableObjectType;
-            this.slug = decodedSlug;
             this._fetchingStarted();
 
             try {
 
                 const { data } = await timetableApiRequest.get(
-                    `/${_pluralizeTimetableObjectType(timetableObjectType)}/${slug}`
+                    `/${timetableObjectType}/${slug}`
                 );
 
                 this._fetchingSucceeded(data);
@@ -54,22 +50,17 @@ class TimetableObjectModel extends ExternalDataModel {
         })();
     }
 
-    static _pluralizeTimetableObjectType(type) {
-
-        return `${type}${(type === 'class') ? 'es' : 's'}`;
-    }
-
     static _doesSlugExist(timetableObjectType, slug) {
 
         switch (timetableObjectType) {
 
-            case 'teacher':
+            case 'teachers':
                 return teachersListModel.doesSlugExist(slug);
 
-            case 'class':
+            case 'classes':
                 return classesListModel.doesSlugExist(slug);
 
-            case 'classroom':
+            case 'classrooms':
                 return classroomsListModel.doesSlugExist(slug);
 
             default:

@@ -1,5 +1,5 @@
 {
-    "nauczyciel": "teacher",
-    "klasa": "class",
-    "sala": "classroom"
+    "nauczyciel": "teachers",
+    "klasa": "classes",
+    "sala": "classrooms"
 }
