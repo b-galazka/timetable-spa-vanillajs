@@ -3,3 +3,4 @@ export { MobileApp } from './mobileApp/MobileApp';
 export { NotFound } from './notFound/NotFound';
 export { AppContent } from './appContent/AppContent';
 export { Sidebar } from './sidebar/Sidebar';
+export { Timetable } from './timetable/Timetable';

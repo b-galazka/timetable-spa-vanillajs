@@ -3,7 +3,7 @@ import { getCssClasses } from '../../lib/getCssClasses';
 
 import * as initialDataModels from '../../models/timetableObjectsLists';
 import { timetableObjectModel, userInterfaceModel } from '../../models';
-import { LoadingAnimation, Sidebar } from '../';
+import { LoadingAnimation, Sidebar, Timetable } from '../';
 
 import sharedStrings from '../../shared/json/strings';
 
@@ -102,6 +102,7 @@ export class AppContent extends Component {
         return `
             <section class="${cssClasses}">
                 ${new Sidebar({ urlParams }).render()}
+                ${new Timetable({ urlParams }).render()}
             </section>
         `;
     }
