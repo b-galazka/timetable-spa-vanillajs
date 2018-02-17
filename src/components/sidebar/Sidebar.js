@@ -94,7 +94,8 @@ export class Sidebar extends Component {
                 url += `/${encodeURIComponent(slug || number)}`;
 
             const cssClass = (
-                (urlSlug === slug && urlTimtableType === activeTimetableObjectsList) ?
+                ((urlSlug === slug || urlSlug === number) &&
+                urlTimtableType === activeTimetableObjectsList) ?
                     'class="active"' :
                     ''
             );
