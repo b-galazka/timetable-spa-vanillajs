@@ -1,12 +1,20 @@
 import { Component } from '../../lib/Component';
 import { getCssClasses } from '../../lib/getCssClasses';
 
-import { timetableObjectModel, teachersListModel } from '../../models';
+import {
+    timetableObjectModel,
+    teachersListModel,
+    userInterfaceModel
+} from '../../models';
 
-import strings from '../../shared/json/strings';
+import { LoadingAnimation } from '../';
+
+import sharedStrings from '../../shared/json/strings';
+import strings from './strings';
 import urlsTranslations from '../../shared/json/urlsTranslations';
 
 import './timetable.scss';
+import '../../shared/scss/animations.scss';
 
 export class Timetable extends Component {
 
@@ -32,6 +40,26 @@ export class Timetable extends Component {
         `;
     }
 
+    get eventsHandlers() {
+
+        const removeAnimationClass = this._removeAnimationClass.bind(this);
+
+        return [
+
+            {
+                event: 'animationend',
+                selector: '.timetable__wrapper',
+                handler: removeAnimationClass
+            },
+
+            {
+                event: 'webkitAnimationEnd',
+                selector: '.timetable__wrapper',
+                handler: removeAnimationClass
+            }
+        ]
+    }
+
     _renderProperTemplate() {
 
         if (timetableObjectModel.notFound) {
@@ -39,12 +67,12 @@ export class Timetable extends Component {
             return this._renderError();
         }
 
-        return this._renderHeader();
+        return (this._renderHeader() + this._renderContent());
     }
 
     _renderError() {
 
-        const { baseTitle, notFoundTitle, pageNotFound } = strings;
+        const { baseTitle, notFoundTitle, pageNotFound } = sharedStrings;
 
         Timetable.renderTitle(baseTitle + notFoundTitle);
 
@@ -70,12 +98,96 @@ export class Timetable extends Component {
             title = decodedSlug;
         }
 
-        Timetable.renderTitle(strings.baseTitle + title);
+        Timetable.renderTitle(sharedStrings.baseTitle + title);
 
         return `
             <header class="timetable__header">
                 <h1 class="timetable__title">${title}</h1>
             </header>
         `;
+    }
+
+    _renderContent() {
+
+        const wrapperCssClasses = getCssClasses({
+            'timetable__wrapper': true,
+            'timetable__wrapper--data-not-fetched': !timetableObjectModel.fetched,
+            'timetable__wrapper--data-fetched': timetableObjectModel.fetched,
+            'animated': userInterfaceModel.timetableContentAnimation
+        });
+
+        let output = `<div class="${wrapperCssClasses}">`;
+
+        if (timetableObjectModel.fetched) {
+
+            output += this._renderTimetableContent();
+
+        } else if (timetableObjectModel.fetchingError) {
+
+            output += this._renderFetchingError();
+
+        } else {
+
+            output += this._renderLoader();
+        }
+
+        output += '</div>';
+
+        return output;
+    }
+
+    _renderTimetableContent() {
+
+        const updateTime = timetableObjectModel.fetchedData.update;
+
+        return `
+            <section class="timetable__content">
+
+            </section>
+            <footer class="timetable__footer">
+                <p>${strings.lastUpdate}: ${this._formatDate(updateTime)}</p>
+            </footer>
+        `;
+    }
+
+    _renderLoader() {
+
+        return `
+            <figure class="timetable__loader">
+                ${new LoadingAnimation().render()}
+            </figure>
+        `;
+    }
+
+    _renderFetchingError() {
+
+        return `
+            <p 
+                class="timetable__error"
+            >${sharedStrings.fetchingError}</p>
+        `;
+    }
+
+    _formatDate(updateTime) {
+
+        const date = new Date(updateTime);
+
+        return (
+            this._formatTimeUnit(date.getDate()) +
+            `/${this._formatTimeUnit(date.getMonth() + 1)}/${date.getFullYear()}` +
+            ` ${date.getHours()}:${this._formatTimeUnit(date.getMinutes())}`
+        );
+    }
+
+    _formatTimeUnit(timeUnit) {
+
+        return `${(timeUnit < 10) ? '0' : ''}${timeUnit}`;
+    }
+
+    _removeAnimationClass() {
+
+        userInterfaceModel.setData({
+            timetableContentAnimation: false
+        });
     }
 }

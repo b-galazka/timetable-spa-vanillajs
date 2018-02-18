@@ -4,8 +4,9 @@ import { ExternalDataModel } from '../lib/ExternalDataModel';
 import {
     teachersListModel,
     classesListModel,
-    classroomsListModel
-} from './timetableObjectsLists';
+    classroomsListModel,
+    userInterfaceModel
+} from './';
 
 class TimetableObjectModel extends ExternalDataModel {
 
@@ -76,6 +77,11 @@ class TimetableObjectModel extends ExternalDataModel {
     }
 
     _fetchingSucceeded(data) {
+
+        if (this.fetchedAsInitialData) {
+
+            userInterfaceModel.timetableContentAnimation = true;
+        }
 
         this.notFound = false;
         this.fetchedAsInitialData = true;
