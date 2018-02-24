@@ -4,6 +4,7 @@ const webpack = require('webpack');
 module.exports = {
 
     entry: [
+        'matches-selector-polyfill/src/matches-selector-polyfill',
         'babel-polyfill',
         path.resolve(__dirname, 'src/index.js')
     ],

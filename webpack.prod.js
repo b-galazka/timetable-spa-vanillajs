@@ -7,6 +7,7 @@ const extractCSS = new ExtractTextPlugin('../css/style.css');
 module.exports = {
 
     entry: [
+        'matches-selector-polyfill/dist/matches-selector-polyfill',
         'babel-polyfill',
         path.resolve(__dirname, 'src/index.js')
     ],
