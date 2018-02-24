@@ -7,7 +7,7 @@ import {
     userInterfaceModel
 } from '../../models';
 
-import { LoadingAnimation } from '../';
+import { LoadingAnimation, Table } from '../';
 
 import sharedStrings from '../../shared/json/strings';
 import strings from './strings';
@@ -142,7 +142,7 @@ export class Timetable extends Component {
 
         return `
             <section class="timetable__content">
-
+                ${new Table().render()}
             </section>
             <footer class="timetable__footer">
                 <p>${strings.lastUpdate}: ${this._formatDate(updateTime)}</p>

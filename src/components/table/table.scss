@@ -1,0 +1,162 @@
+@import '../../shared/scss/config.scss';
+
+.table {
+    width: 100%;
+    max-width: 1170px;
+    margin: auto;
+    border-top: 1px solid #FFF;
+    border-left: 1px solid #FFF;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 1170px) {
+        max-width: 300px;
+        flex-direction: column;
+        border: none;
+    }
+
+    &__cell {
+        border-right: 1px solid #FFF;
+        border-bottom: 1px solid #FFF;
+        width: calc(20% - 32px);
+        padding: 3px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @media (max-width: 1300px) {
+            width: calc(20% - 28px);
+        }
+
+        @media (max-width: 1170px) {
+            order: 0!important;
+            width: 100%;
+            border: 1px solid #FFF;
+            border-top: 0;
+            padding-left: 35px;
+            position: relative;
+
+            &::before {
+                content: attr(data-number);
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 30px;
+                height: 100%;
+                border-right: 1px solid #FFF;
+                background-color: $darkGrey;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        &--ordinal-number {
+            background-color: $darkGrey;
+            width: 30px;
+            text-align: center;
+
+            @media (max-width: 1170px) {
+                display: none;
+            }
+        }
+
+        &--hour {
+            background-color: $grey;
+            width: 130px;
+            text-align: center;
+
+            @media (max-width: 1300px) {
+                width: 110px;
+            }
+
+            @media (max-width: 1170px) {
+                width: 100%;
+            }
+        }
+
+        &--mobile-hidden {
+            @media (max-width: 1170px) {
+                display: none;
+            }
+        }
+
+        &--empty {
+            display: block;
+            padding: 0;
+
+            @media (max-width: 1170px) {
+                &::before {
+                    @extend .table__cell::before;
+                    
+                    position: static;
+                    padding: 3px 0;
+                }
+            }    
+        }
+
+        div {
+            font-size: 0;
+
+            &:not(:last-child) {
+                margin-bottom: 5px;
+            }    
+        }
+
+        a, span {            
+            display: inline-block;
+            font-size: 1rem;
+
+            &:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+    }
+
+    &__header {
+        @extend .table__cell;
+
+        order: 1;
+        background-color: $darkGrey;
+        text-align: center;
+        font-weight: bold;
+
+        @media (max-width: 1170px) {
+            margin-top: 30px;
+            border-top: 1px solid #FFF;
+            position: relative;
+            padding-left: 35px;
+
+            &::before {
+                @extend .table__cell::before;
+
+                content: 'Nr';
+            }
+        }
+
+        &--ordinal-numbers {
+            width: 30px;
+
+            @media (max-width: 1170px) {
+                display: none;
+            }
+        }
+
+        &--hours {
+            width: 130px;
+
+            @media (max-width: 1300px) {
+                width: 110px;
+            }
+
+            @media (max-width: 1170px) {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+
+        &--mobile-hidden {
+            @extend .table__cell--mobile-hidden;
+        }
+    }
+}

@@ -105,6 +105,20 @@ class TimetableObjectModel extends ExternalDataModel {
 
         this.dataChangeNotifier.notifyAllListeners();
     }
+
+    getMaxNumberOfLessonsInDay() {
+
+        if (!this.fetchedData) {
+
+            return 0;
+        }
+
+        const { timetable } = this.fetchedData;
+
+        return timetable.reduce((numberOfLessons, day) => (
+            (day.length > numberOfLessons) ? day.length : numberOfLessons
+        ), 0);
+    }
 }
 
 export const timetableObjectModel = new TimetableObjectModel();

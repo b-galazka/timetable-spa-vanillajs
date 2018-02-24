@@ -1,0 +1,11 @@
+{
+    "number": "Nr",
+    "hour": "Godz",
+    "days": [
+        "Poniedziałek",
+        "Wtorek",
+        "Środa",
+        "Czwartek",
+        "Piątek"
+    ]
+}
