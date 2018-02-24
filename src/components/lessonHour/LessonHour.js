@@ -71,7 +71,7 @@ export class LessonHour extends Component {
                 return `
                     <a
                         routerLink="/nauczyciel/${encodeURIComponent(teacherSlug)}"
-                        title="${teacherName}"
+                        ${(teacherName) ? `title="${teacherName}"` : ''} 
                     >${teacherSlug}</a>
                 `;
         }
