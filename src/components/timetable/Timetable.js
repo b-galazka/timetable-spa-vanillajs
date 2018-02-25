@@ -98,7 +98,7 @@ export class Timetable extends Component {
             title = decodedSlug;
         }
 
-        Timetable.renderTitle(sharedStrings.baseTitle + title);
+        Component.renderTitle(sharedStrings.baseTitle + title);
 
         return `
             <header class="timetable__header">
