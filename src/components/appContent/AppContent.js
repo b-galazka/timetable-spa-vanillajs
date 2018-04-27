@@ -129,7 +129,7 @@ export class AppContent extends Component {
             <section class="app__error">
                 <p
                     class="app__error-message"
-                >${sharedStrings.fetchingError}</p>
+                >${Component.espaceHtml(sharedStrings.fetchingError)}</p>
             </section>
         `;
     }

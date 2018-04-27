@@ -23,12 +23,12 @@ export class NotFound extends Component {
                 <div class="not-found-page__wrapper">
                     <p 
                         class="not-found-page__message"
-                    >${sharedStrings.pageNotFound}</p>
+                    >${Component.espaceHtml(sharedStrings.pageNotFound)}</p>
 
                     <a
                         routerLink="/"
                         class="button not-found-page__button"
-                    >${strings.homepageButtonText}</a>
+                    >${Component.espaceHtml(strings.homepageButtonText)}</a>
                 </div>
             </main>
         `;

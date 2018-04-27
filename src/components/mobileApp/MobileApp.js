@@ -73,12 +73,12 @@ export class MobileApp extends Component {
                     class="button mobile-app__button"
                     href=${apkFileUrl}
                     target="_blank"
-                >${strings.downloadApp}</a>
+                >${Component.espaceHtml(strings.downloadApp)}</a>
 
                 <button
                     class="button mobile-app__button"
                     id="visit-page-button"
-                >${strings.visitPage}</button>
+                >${Component.espaceHtml(strings.visitPage)}</button>
             </div>
         `;
     }
@@ -97,7 +97,7 @@ export class MobileApp extends Component {
         return `
             <p
                 class="mobile-app__fetching-error"
-            >${sharedStrings.fetchingError}</p>
+            >${Component.espaceHtml(sharedStrings.fetchingError)}</p>
         `;
     }
 }

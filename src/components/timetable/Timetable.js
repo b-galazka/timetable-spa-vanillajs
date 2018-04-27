@@ -76,7 +76,7 @@ export class Timetable extends Component {
 
         Timetable.renderTitle(baseTitle + notFoundTitle);
 
-        return `<p class="timetable__error">${pageNotFound}</p>`;
+        return `<p class="timetable__error">${Component.espaceHtml(pageNotFound)}</p>`;
     }
 
     _renderHeader() {
@@ -102,7 +102,7 @@ export class Timetable extends Component {
 
         return `
             <header class="timetable__header">
-                <h1 class="timetable__title">${title}</h1>
+                <h1 class="timetable__title">${Component.espaceHtml(title)}</h1>
             </header>
         `;
     }
@@ -145,7 +145,7 @@ export class Timetable extends Component {
                 ${new Table().render()}
             </section>
             <footer class="timetable__footer">
-                <p>${strings.lastUpdate}: ${this._formatDate(updateTime)}</p>
+                <p>${Component.espaceHtml(strings.lastUpdate)}: ${this._formatDate(updateTime)}</p>
             </footer>
         `;
     }
@@ -164,7 +164,7 @@ export class Timetable extends Component {
         return `
             <p 
                 class="timetable__error"
-            >${sharedStrings.fetchingError}</p>
+            >${Component.espaceHtml(sharedStrings.fetchingError)}</p>
         `;
     }
 

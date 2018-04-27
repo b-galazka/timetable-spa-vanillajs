@@ -70,7 +70,7 @@ export class Sidebar extends Component {
                     type="button"
                     class="${cssClasses}"
                     data-list="${listType}"
-                >${strings[listType]}</button>
+                >${Component.espaceHtml(strings[listType])}</button>
             `;
 
             return (output + buttonTemplate);
@@ -103,7 +103,7 @@ export class Sidebar extends Component {
             output += `
                 <li
                     ${cssClass}
-                ><a routerLink="${url}">${name || slug || number}</a></li>
+                ><a routerLink="${url}">${Component.espaceHtml(name || slug || number)}</a></li>
             `;
         });
 

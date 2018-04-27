@@ -32,7 +32,7 @@ export class Table extends Component {
         let output = `
             <header 
                 class="table__header table__header--ordinal-numbers"
-            >${strings.number}</header>
+            >${Component.espaceHtml(strings.number)}</header>
         `;
 
         for (let i = 1; i <= this._rowsNumber; i++) {
@@ -56,7 +56,7 @@ export class Table extends Component {
         let output = `
             <header 
                 class="table__header table__header--hours"
-            >${strings.hour}</header>
+            >${Component.espaceHtml(strings.hour)}</header>
         `;
 
         for (let i = 0; i < this._rowsNumber; i++) {
@@ -69,7 +69,7 @@ export class Table extends Component {
                     data-number="${i + 1}"
                     class="table__cell table__cell--hour"
                     style="order: ${order}; -ms-flex-order: ${order};"
-                >${start} - ${end}</div>
+                >${Component.espaceHtml(start)} - ${Component.espaceHtml(end)}</div>
             `;
         }
 
@@ -97,7 +97,12 @@ export class Table extends Component {
             'table__header--mobile-hidden': (day.length === 0)
         });
 
-        let output = `<header class="${cssClasses}">${dayName}</header>`;
+        let output = `
+            <header
+                class="${cssClasses}"
+            >${Component.espaceHtml(dayName)}</header>
+        `;
+        
         let numberOfRenderedCells = 0;
 
         day.forEach((lessonHour, index) => {

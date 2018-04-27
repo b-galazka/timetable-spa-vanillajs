@@ -1,5 +1,24 @@
 export class Component {
 
+    static espaceHtml(str) {
+
+        const specialCharsReplacements = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;',
+            '/': '&#x2F;',
+            '`': '&#x60;',
+            '=': '&#x3D;'
+        };
+
+        return String(str).replace(
+            /[&<>"'`=\/]/g, 
+            value => specialCharsReplacements[value]
+        );
+    }
+
     static renderTitle(title) {
 
         if (document.title !== title) {

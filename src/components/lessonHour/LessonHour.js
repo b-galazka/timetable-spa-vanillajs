@@ -43,7 +43,7 @@ export class LessonHour extends Component {
 
             output += `
                 <div>
-                    <span>${subject}</span>
+                    <span>${Component.espaceHtml(subject)}</span>
                     ${this._renderSecondInfo(lesson)}
                     ${this._renderThirdInfo(lesson)}
                 </div>
@@ -63,7 +63,7 @@ export class LessonHour extends Component {
                 return `
                     <a
                         routerLink="/klasa/${encodeURIComponent(schoolClass)}"
-                    >${schoolClass}</a>
+                    >${Component.espaceHtml(schoolClass)}</a>
                 `;
                 
             case 'class':
@@ -72,7 +72,7 @@ export class LessonHour extends Component {
                     <a
                         routerLink="/nauczyciel/${encodeURIComponent(teacherSlug)}"
                         ${(teacherName) ? `title="${teacherName}"` : ''} 
-                    >${teacherSlug}</a>
+                    >${Component.espaceHtml(teacherSlug)}</a>
                 `;
         }
     }
@@ -87,7 +87,7 @@ export class LessonHour extends Component {
                 return `
                     <a
                         routerLink="/klasa/${encodeURIComponent(schoolClass)}"
-                    >${schoolClass}</a>
+                    >${Component.espaceHtml(schoolClass)}</a>
                 `;
 
             case 'class':
@@ -95,7 +95,7 @@ export class LessonHour extends Component {
                 return `
                     <a
                         routerLink="/sala/${encodeURIComponent(classroom)}"
-                    >${classroom}</a>
+                    >${Component.espaceHtml(classroom)}</a>
                 `;
         }
     }
