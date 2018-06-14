@@ -5,6 +5,7 @@ module.exports = {
 
     entry: [
         'babel-polyfill',
+        'element-closest',
         path.resolve(__dirname, 'src/index.js')
     ],
 
