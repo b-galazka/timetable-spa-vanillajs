@@ -163,10 +163,16 @@ export class Router {
 
         root.addEventListener('click', (event) => {
 
-            const { target } = event;
-            const routerLink = target.getAttribute('routerLink');
+            const link = event.target.closest('a');
 
-            if (target.nodeName !== 'A' || !routerLink) {
+            if (!link) {
+
+                return;
+            }
+
+            const routerLink = link.getAttribute('routerLink');
+
+            if (!routerLink) {
 
                 return;
             }
