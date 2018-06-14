@@ -14,6 +14,7 @@ class UserInterfaceModel extends Model {
         this.timetableObjectsListSelected = false;
 
         this.timetableContentAnimation = false;
+        this.isSidebarOpenedOnMobile = false;
     }
 
     static detectAndroidDevice() {

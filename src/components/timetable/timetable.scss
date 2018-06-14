@@ -22,11 +22,19 @@
         background-color: $darkGrey;
         padding: 30px 10px 10px 10px;
         border-bottom: 5px solid #FFF;
+
+        @media (max-width: 600px) {
+            padding: 10px 55px;
+        }
     }
 
     &__title {
         text-align: center;
         font-size: 2rem;
+
+        @media (max-width: 600px) {
+            font-size: 1.5rem;
+        }
     }
 
     &__wrapper {
@@ -63,6 +71,10 @@
 
     &__content {
         flex: 1 0 auto;
-        padding: 80px 0 80px 0;
+        padding: 80px;
+
+        @media (max-width: 600px) {
+            padding: 50px 0;
+        }
     }
 }

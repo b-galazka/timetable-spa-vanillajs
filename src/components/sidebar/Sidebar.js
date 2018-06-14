@@ -40,14 +40,29 @@ export class Sidebar extends Component {
 
     get template() {
 
+        const { isSidebarOpenedOnMobile } = userInterfaceModel;
+
+        const sidebarCssClasses = getCssClasses({
+            sidebar: true,
+            'sidebar--mobile-opened': isSidebarOpenedOnMobile
+        });
+
+        const mobileTriggerCssClasses = getCssClasses({
+            'sidebar__mobile-trigger': true,
+            'sidebar__mobile-trigger--sidebar-opened': isSidebarOpenedOnMobile
+        });
+
         return `
-            <section class="sidebar">
+            <section class="${sidebarCssClasses}">
                 <div class="sidebar__wrapper">
                     <div class="sidebar__buttons">
                         ${this._renderButtons()}
                     </div>
                     ${this._renderTimtableObjectsList()}
                 </div>
+                <button class="${mobileTriggerCssClasses}">
+                    <span></span>
+                </button>
             </section>
         `;
     }
@@ -130,10 +145,23 @@ export class Sidebar extends Component {
     get eventsHandlers() {
 
         return [
+
             {
                 event: 'click',
                 selector: '.sidebar__button',
                 handler: this._toggleTimetableObjectsList.bind(this)
+            },
+
+            {
+                event: 'click',
+                selector: '.sidebar__mobile-trigger',
+                handler: this._toggleOnMobile.bind(this)
+            },
+
+            {
+                event: 'click',
+                selector: '.sidebar__list a',
+                handler: this._hideOnMobile.bind(this)
             }
         ];
     }
@@ -144,6 +172,24 @@ export class Sidebar extends Component {
 
         userInterfaceModel.setData({
             activeTimetableObjectsList: listType
+        });
+    }
+
+    _toggleOnMobile() {
+
+        console.log('XD');
+
+        const { isSidebarOpenedOnMobile } = userInterfaceModel;
+
+        userInterfaceModel.setData({
+            isSidebarOpenedOnMobile: !isSidebarOpenedOnMobile
+        });
+    }
+
+    _hideOnMobile() {
+
+        userInterfaceModel.setData({
+            isSidebarOpenedOnMobile: false
         });
     }
 }
