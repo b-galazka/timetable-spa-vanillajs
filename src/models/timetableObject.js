@@ -35,8 +35,10 @@ class TimetableObjectModel extends ExternalDataModel {
 
             try {
 
-                const { data } = await timetableApiRequest.get(
-                    `/${timetableObjectType}/${slug}`
+                const data = await (
+                    this.fetchedAsInitialData ?
+                        TimetableObjectModel._fetchTimetableObject(timetableObjectType, slug) :
+                        TimetableObjectModel._fetchInitialData(timetableObjectType, slug)
                 );
 
                 this._fetchingSucceeded(data);
@@ -49,6 +51,30 @@ class TimetableObjectModel extends ExternalDataModel {
                 return false;
             }
         })();
+    }
+
+    static async _fetchInitialData(timetableObjectType, timetableObjectSlug) {
+
+        const [lastUpdate, timetableObject] = await Promise.all([
+            TimetableObjectModel._fetchLastUpdateDateTime(),
+            TimetableObjectModel._fetchTimetableObject(timetableObjectType, timetableObjectSlug)
+        ]);
+
+        return Object.assign({}, timetableObject, { lastUpdate });
+    }
+
+    static async _fetchTimetableObject(type, slug) {
+
+        const { data } = await timetableApiRequest.get(`/${type}/${slug}`);
+
+        return data;
+    }
+
+    static async _fetchLastUpdateDateTime() {
+
+        const { data } = await timetableApiRequest.get('/timetable/last-update');
+
+        return data;
     }
 
     static _doesSlugExist(timetableObjectType, slug) {
@@ -81,6 +107,7 @@ class TimetableObjectModel extends ExternalDataModel {
         if (this.fetchedAsInitialData) {
 
             userInterfaceModel.timetableContentAnimation = true;
+            data.lastUpdate = this.fetchedData.lastUpdate;
         }
 
         this.notFound = false;

@@ -138,7 +138,7 @@ export class Timetable extends Component {
 
     _renderTimetableContent() {
 
-        const updateTime = timetableObjectModel.fetchedData.update;
+        const updateTime = timetableObjectModel.fetchedData.lastUpdate.dateTime;
 
         return `
             <section class="timetable__content">
@@ -162,7 +162,7 @@ export class Timetable extends Component {
     _renderFetchingError() {
 
         return `
-            <p 
+            <p
                 class="timetable__error"
             >${Component.espaceHtml(sharedStrings.fetchingError)}</p>
         `;
