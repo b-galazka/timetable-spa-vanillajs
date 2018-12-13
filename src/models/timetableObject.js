@@ -67,7 +67,7 @@ class TimetableObjectModel extends ExternalDataModel {
 
         const { data } = await timetableApiRequest.get(`/${type}/${slug}`);
 
-        return data;
+        return Object.assign({}, data, { type });
     }
 
     static async _fetchLastUpdateDateTime() {

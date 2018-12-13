@@ -25,7 +25,7 @@ export class LessonHour extends Component {
         });
 
         return `
-            <div 
+            <div
                 class="${cssClasses}"
                 data-number="${this._number}"
                 style="order: ${this._order}; -ms-flex-order: ${this._order};"
@@ -59,19 +59,19 @@ export class LessonHour extends Component {
 
         switch (this._timetableType) {
 
-            case 'teacher':
+            case 'teachers':
                 return `
                     <a
                         routerLink="/klasa/${encodeURIComponent(schoolClass)}"
                     >${Component.espaceHtml(schoolClass)}</a>
                 `;
-                
-            case 'class':
-            case 'classroom':
+
+            case 'classes':
+            case 'classrooms':
                 return `
                     <a
                         routerLink="/nauczyciel/${encodeURIComponent(teacherSlug)}"
-                        ${(teacherName) ? `title="${teacherName}"` : ''} 
+                        ${(teacherName) ? `title="${teacherName}"` : ''}
                     >${Component.espaceHtml(teacherSlug)}</a>
                 `;
         }
@@ -83,15 +83,15 @@ export class LessonHour extends Component {
 
         switch (this._timetableType) {
 
-            case 'classroom':
+            case 'classrooms':
                 return `
                     <a
                         routerLink="/klasa/${encodeURIComponent(schoolClass)}"
                     >${Component.espaceHtml(schoolClass)}</a>
                 `;
 
-            case 'class':
-            case 'teacher':
+            case 'classes':
+            case 'teachers':
                 return `
                     <a
                         routerLink="/sala/${encodeURIComponent(classroom)}"
